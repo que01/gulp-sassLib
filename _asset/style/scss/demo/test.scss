@@ -1,0 +1,113 @@
+@import "../../../../bower_components/compass-mixins/lib/compass";
+@import "../../../../bower_components/susy/sass/susy";
+@import "../../../../bower_components/compass-breakpoint/stylesheets/breakpoint";
+
+// compass
+@include global-reset;
+
+
+// sass
+
+#a{
+	font-size:24px;
+	&:hover{
+		background:#cc3366;
+	}
+}
+
+// breakpoint
+$high-tide: 500px;
+
+.johnny-utah {
+  @include breakpoint($high-tide) {
+    content: 'Whoa.';
+  }
+}
+
+//susy
+$susy: (
+  global-box-sizing: border-box,
+  use-custom: (rem: true)
+);
+
+/**
+ * Styles for AG grids & Container
+ */
+.container {
+  background-color: #fbeecb;
+}
+.ag1, .ag3 {
+  background-color: #71dad2;
+}
+.ag2 {
+  background-color: #fae7b3;
+}
+.ag4,.ag5,.ag8,.ag9 {
+  background-color: #ee9e9c;
+}
+.ag6 {
+  background-color: #f09671;
+}
+.ag7 {
+  background-color: #f6d784;
+}
+.ag10 {
+  background-color: #ea9fc3;
+}
+/**
+* Text Styles
+ */
+h2 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: normal;
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+}
+
+.container {
+  @include container;
+}
+
+.ag1 {
+  @include span(2 of 10);
+}
+.ag2 {
+  @include span(6 of 10);
+  @include clearfix; 
+}
+.ag3 {
+  @include span(2 of 10 last);
+}
+.ag4 {
+  @include span(3 of 6);
+}
+.ag5 {
+  @include span(3 of 6 last);
+}
+
+//Alternatively, you can make use of the last mixin and write it this way. The last mixin just changes that element to be the last in the row. 
+.ag4,.ag5 {
+  @include span(3 of 6);
+}
+.ag5 {
+  @include last;
+}
+.ag6 {
+  @include span(2 of 6);
+}
+.ag7 {
+  @include span(4 of 6 last);
+  @include clearfix;
+}
+.ag8 {
+  @include span(2 of 4);
+}
+.ag9 {
+  @include span(2 of 4 last);
+}
+.ag10 {
+  clear: both;
+  // Alternatively, you can now use the span mixin with the full keyword to tell Susy this should be a 100% width 
+  // @include span(full);
+}
