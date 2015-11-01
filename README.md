@@ -1,1 +1,2 @@
-## 这是一个为方便使用各种sass mixins而创建的gulp自动化工程
+## 说明
+这是一份整合了gulp和webpack的工作流

@@ -1,7 +1,7 @@
 {
-  "name": "gulp-sassLib",
+  "name": "gulp-webpack-workflow",
   "version": "1.0.0",
-  "description": "sass自动化",
+  "description": "gulp-webpack-workflow",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,8 +14,28 @@
   "author": "que01",
   "license": "ISC",
   "devDependencies": {
+    "bower-webpack-plugin": "^0.1.9",
+    "browser-sync": "^2.9.11",
+    "component-webpack-plugin": "^0.2.1",
+    "css-loader": "^0.21.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
+    "fs": "0.0.2",
+    "gulp-clean": "^0.3.1",
+    "gulp-debug": "^2.1.2",
+    "gulp-filter": "^3.0.1",
+    "gulp-hash": "^3.0.1",
+    "gulp-inject": "^3.0.0",
     "gulp-load-plugins": "^1.0.0",
     "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.6.0"
+    "gulp-sourcemaps": "^1.6.0",
+    "html-webpack-plugin": "^1.6.2",
+    "lodash": "^3.10.1",
+    "sass-loader": "^3.1.1",
+    "style-loader": "^0.13.0",
+    "tmodjs-loader": "^1.0.0",
+    "url-loader": "^0.5.6",
+    "webpack-config": "^1.1.1",
+    "webpack-config-stream": "^1.0.1"
   }
 }

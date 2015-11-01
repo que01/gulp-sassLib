@@ -1,0 +1,132 @@
+/*
+ * A partial implementation of the Ruby list functions from Compass:
+ * https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/lists.rb
+ */
+/*
+ * A partial implementation of the Ruby constants functions from Compass:
+ * https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/constants.rb
+ */
+/*
+ * A partial implementation of the Ruby display functions from Compass:
+ * https://github.com/Compass/compass/blob/stable/core/lib/compass/core/sass_extensions/functions/display.rb
+ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+#text {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis; }
+
+#text2 {
+  white-space: nowrap; }
+
+#stretch {
+  position: absolute;
+  top: 10px;
+  bottom: 30px;
+  left: 40px;
+  right: 20px; }
+
+#a {
+  color: red; }
+  #a:hover {
+    color: blue; }
+  #a:active {
+    color: yellow; }
+
+#ul {
+  list-style: none; }
+  #ul li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0; }
+
+#ul li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0; }
+
+#ul2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  *zoom: 1; }
+  #ul2 li {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+    white-space: nowrap;
+    display: inline;
+    float: left;
+    padding-left: 4px;
+    padding-right: 4px; }
+    #ul2 li:first-child, #ul2 li.first {
+      padding-left: 0; }
+    #ul2 li:last-child {
+      padding-right: 0; }
+    #ul2 li.last {
+      padding-right: 0; }
+
+#border-radius {
+  -webkit-border-radius: first-value-of(5px) first-value-of(10px);
+  -moz-border-radius: 5px / 10px;
+  border-radius: 5px / 10px;
+  -webkit-box-shadow: compact(#ccc, 0, 5px, 2px, 0, false, false, false, false, false);
+  -moz-box-shadow: compact(#ccc, 0, 5px, 2px, 0, false, false, false, false, false);
+  box-shadow: compact(#ccc, 0, 5px, 2px, 0, false, false, false, false, false); }
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em; }
+
+.test {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3; }

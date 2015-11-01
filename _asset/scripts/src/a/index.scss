@@ -1,0 +1,14 @@
+@import "../../../../bower_components/compass-mixins/lib/compass";
+@import "../../../../bower_components/compass-mixins/lib/compass/layout";
+
+
+
+// compass
+@include global-reset;
+
+a{
+	@include link-colors(#000,#cc3366)
+}
+.aaa{
+  color: grey;
+}

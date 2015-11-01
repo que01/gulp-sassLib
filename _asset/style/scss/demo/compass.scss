@@ -1,0 +1,52 @@
+@import "../../../../bower_components/compass-mixins/lib/compass";
+@import "../../../../bower_components/compass-mixins/lib/compass/layout";
+
+
+
+// compass
+@include global-reset;
+
+
+
+// #footer{
+//   @include sticky-footer(40px,"#footer","#content","#sticky-footer");
+// }
+
+
+#text{
+  @include ellipsis;
+}
+
+#text2{
+  @include nowrap;
+}
+
+#stretch{
+  @include stretch(10px,20px,30px,40px);
+}
+
+#a{
+  @include link-colors(red,blue,yellow);
+}
+
+#ul{
+  @include no-bullets;
+}
+
+#ul li{
+  @include no-bullet;
+}
+
+#ul2{
+  @include horizontal-list;
+}
+
+#border-radius{
+  @include border-radius(5px,10px);
+  @include box-shadow(#ccc,0,5px,2px,0);
+}
+h1 {@include adjust-font-size-to(48px)}
+
+.test{
+  @include opacity(0.3);
+}
