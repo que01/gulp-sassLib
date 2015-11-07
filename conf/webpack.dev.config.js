@@ -21,7 +21,7 @@ module.exports = new WebpackConfig().extend('./conf/webpack.base.config.js').mer
             // 'html5shiv',
             // 'html5shiv/dist/html5shiv-printshiv.js',
             // 'respond'
-            'npm-zepto'
+            // 'npm-zepto'
         ]
     },
     plugins: [

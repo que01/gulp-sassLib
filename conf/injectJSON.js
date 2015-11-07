@@ -4,10 +4,11 @@ module.exports = (function(){
 		file:[
 			{
 				"fileName":"html/index.html",
+				"basePath":"_asset/scripts/dist/a",
 				"dist":"html",
 				"sources":{
-						css:"_asset/scripts/dist/a/*.css",
-						js:"_asset/scripts/dist/a/*.js"
+						"css":"_asset/scripts/dist/a/*.css",
+						"js":"_asset/scripts/dist/a/*.js"
 				}
 			}
 		]

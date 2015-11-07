@@ -13,7 +13,7 @@ gulp.task('sass', function () {
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('./_asset/style/css/'));
 });
- 
+
 gulp.task('sass:watch', function () {
   gulp.watch('./_asset/style/scss/**/*.scss', ['sass']);
 });
@@ -94,56 +94,56 @@ gulp.task('serve', ['default'], function(){
 
 
 //inject 任务配资文件在config/injectJSON中
+var injectJSON = require("./conf/injectJSON.js");
 gulp.task("inject",function(){
-        var injectJSON = require("./conf/injectJSON/index.js");
-        var fileList = injectJSON.file;
-
-        var opts = {
-            algorithm: 'sha1',
-            hashLength: 8,
-            template: '<%= name %><%= ext %>?v=<%= hash %>'
-        };
-
-        for(var a=0,len=injectJSON.file.length;a<len;a++){
-            gulp.src(fileList[a].fileName)
-              .pipe($.inject(gulp.src(fileList[a].sources.js,{read: true},{relative: true}).pipe($.hash(opts))))     //read为false不会读取数据流 hash会出问题！
-              .pipe($.inject(gulp.src(fileList[a].sources.css,{read: true},{relative: true}).pipe($.hash(opts))))
-              .pipe(gulp.dest(fileList[a].dist));
-        }
+        inject(injectJSON.file)
 });
 gulp.task("inject:watch",function(){
-    var injectJSON = require("./conf/injectJSON/index.js");
     gulp.watch("_asset/scripts/dist/**/*").on('change', function(event) {
         if (event.type === 'changed') {
-            var relativePath = path.relative(__dirname, event.path);
-
-            var opts = {
-                algorithm: 'sha1',
-                hashLength: 8,
-                template: '<%= name %><%= ext %>?v=<%= hash %>'
-            };
-
-            if(/^.*?\.(js)$/.test(relativePath)){
-                //获取目标inject数组推入tmp
-                var tmp = [];
-                for(var a=0,len=injectJSON.file.length;a<len;a++){
-                    if(path.dirname(injectJSON.file[a].sources.js)===path.dirname(relativePath)){
-                        tmp.push(injectJSON.file[a])
-                    }
-                };
-
-                for(var a=0,len=tmp.length;a<len;a++){
-                    gulp.src(tmp[a].fileName)
-                        .pipe($.inject(gulp.src(tmp[a].sources.js , {read: true},{relative: true}).pipe($.hash(opts)).pipe($.debug())))
-                        .pipe($.inject(gulp.src(tmp[a].sources.css , {read: true},{relative: true}).pipe($.hash(opts)).pipe($.debug())))
-                        .pipe(gulp.dest(tmp[a].dist));
+            var basePath = path.dirname(path.relative(__dirname, event.path));
+            var tmp = [];
+            for(var a=0,len=injectJSON.file.length;a<len;a++){
+                if(path.normalize(injectJSON.file[a].basePath)===basePath){
+                    tmp.push(injectJSON.file[a])
                 }
-
-
-            }
+            };
+            inject(tmp);
         }
     })
 });
+
+// helper
+/**
+ * [inject description]
+ * @param  {[array]} fileList
+ *  格式:
+    // file:[
+    //         {
+    //             "fileName":"html/index.html",
+    //             "basePath":"_asset/scripts/dist/a/",
+    //             "dist":"html",
+    //             "sources":{
+    //                     "css":"_asset/scripts/dist/a/*.css",
+    //                     "js":"_asset/scripts/dist/a/*.js"
+    //             }
+    //         }
+    // ]
+ */
+function inject(fileList){
+    var opts = {
+        algorithm: 'sha1',
+        hashLength: 8,
+        template: '<%= name %><%= ext %>?v=<%= hash %>'
+    };
+
+    for(var a=0,len=fileList.length;a<len;a++){
+        gulp.src(fileList[a].fileName)
+          .pipe($.inject(gulp.src(fileList[a].sources.js, {read: true}).pipe($.hash(opts)), {relative: true}))
+          .pipe($.inject(gulp.src(fileList[a].sources.css, {read: true}).pipe($.hash(opts)), {relative: true}))
+          .pipe(gulp.dest(fileList[a].dist));
+    }
+}
 
 
 //default
