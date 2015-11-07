@@ -34,8 +34,8 @@ var src = '_asset/scripts/src/',
     CONFIG_FILENAME = webpack.Config.FILENAME;
 
 
-gulp.task('webpack', [], function() {
-    return gulp.src(path.join(src, '**', CONFIG_FILENAME), { base: path.resolve(src) })
+gulp.task('webpack', ["clean"], function() {
+    gulp.src(path.join(src, '**', CONFIG_FILENAME), { base: path.resolve(src) })
         .pipe(webpack.init(compilerOptions))
         .pipe(webpack.props(configOptions))
         .pipe(webpack.run())
@@ -47,14 +47,18 @@ gulp.task('webpack', [], function() {
             errors: false,
             warnings: false
         }))
-        // .pipe($.filter(function(file){
-        //     return path.dirname(/(.*)+\.(js|css)$/.test(file.path));
-        // }))
+        .pipe($.plumber({
+            errorHandler: onError
+        }))
         .pipe(gulp.dest(dest));
 });
 gulp.task('webpack:watch',function() {
     gulp.watch(path.join(src, '**/*.*')).on('change', function(event) {
         if (event.type === 'changed') {
+
+            var destPath = path.dirname(path.relative(__dirname,event.path)).replace('/src/','/dist/');
+            clean(destPath);
+
             gulp.src(event.path, { base: path.resolve(src) })
                 .pipe(webpack.closest(CONFIG_FILENAME))
                 .pipe(webpack.init(compilerOptions))
@@ -65,6 +69,9 @@ gulp.task('webpack:watch',function() {
                         .pipe(webpack.format({
                             verbose: true,
                             version: false
+                        }))
+                        .pipe($.plumber({
+                            errorHandler: onError
                         }))
                         .pipe(gulp.dest(dest));
                 }));
@@ -113,6 +120,13 @@ gulp.task("inject:watch",function(){
     })
 });
 
+
+gulp.task("clean", function () {
+    gulp.src(dest)
+        .pipe($.rimraf())
+})
+
+
 // helper
 /**
  * [inject description]
@@ -143,6 +157,16 @@ function inject(fileList){
           .pipe($.inject(gulp.src(fileList[a].sources.css, {read: true}).pipe($.hash(opts)), {relative: true}))
           .pipe(gulp.dest(fileList[a].dist));
     }
+}
+
+function clean(path){
+    gulp.src(path)
+        .pipe($.rimraf())
+}
+// Error Helper
+function onError(err) {
+    $.beeper();
+    console.log(err);
 }
 
 
